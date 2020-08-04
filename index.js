@@ -42,6 +42,7 @@ app.post('/create-town', function(req, res){
   let user_first_resident = req.body.first_resident;
 
   const towns_file = __dirname+'/database/towns.gun';
+  const town_id_path = __dirname+'/database/towns/'+user_town_name;
 
   var mailHTML;
   
@@ -96,6 +97,34 @@ app.post('/create-town', function(req, res){
 </html>
   `;
 
+  var mailHTMLSuburbs = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Town of `+user_town_name+`</title>
+    <link href="https://emailtown.codesalvageon.repl.co/external/css/style.min.css" rel="stylesheet"/>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1 class="center">The Town of `+user_town_name+`</h1>
+    <img class="center" src="https://www.tcdhomes.com/wp-content/uploads/2016/02/hemlock01.jpg" width="650" height="500"></img>
+
+    <ul>
+      <li><a href="https://emailtown.codesalvageon.repl.co/invite" target="_blank"><h2>Invite More People to Town</h2></a></li>
+      <li><a href="https://emailtown.codesalvageon.repl.co/build" target="_blank"><h2>Build Building</h2></a></li>
+      <li><a href=""><h2>Check for Changes(If any)</h2></a></li>
+    </ul>
+  </body>
+</html>
+  `;
+
+  let scriptAppend = `<script src="https://emailtown.codesalvageon.repl.co/scripts/append.js"></script>`;
+
+  let space = `
+  `;
+
   if (user_town_type == 'coastal'){
     mailHTML = mailHTMLCoastal;
   }
@@ -103,7 +132,7 @@ app.post('/create-town', function(req, res){
     mailHTML = mailHTMLRural;
   }
   else if (user_town_type == 'suburbs'){
-    
+    mailHTML = mailHTMLSuburbs;
   }
   
   var mailOptions = {
@@ -118,7 +147,41 @@ app.post('/create-town', function(req, res){
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
-      console.log('Message ID: '+info.messageId);
+      
+      if (user_town_visibility == 'public'){
+        if (fs.existsSync(town_id_path)){
+          fs.readFile(__dirname+'/public/index.html', 'utf8', function(err, data){
+            if (err){
+              console.err;
+            }
+            else{
+              res.send(data+scriptAppend);
+            }
+          });
+        }
+        else{
+          fs.appendFile(town_id_path, info.messageId, function(err){
+            if (err){
+              console.err;
+            }
+            else{
+              console.log('ID Stored at: '+town_id_path);
+            }
+          });
+
+          fs.appendFile(__dirname+'/database/towns.gun', space+'<h2>'+user_town_name+' Thread ID: '+info.messageId+'</h2>', function(err){
+            if (err){
+              console.err;
+            }
+            else{
+              console.log('Town Logged at: '+__dirname+'/database/towns.gun');
+            }
+          });
+        }
+      }
+      else{
+        console.log('PRIVATE Email Town created');
+      }
     }
   });
 });
