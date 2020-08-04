@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Email Town</title>
+
+    <!-- Favicon -->
+    <link href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F27%2F27630.png&f=1&nofb=1" rel="icon">
+
+    <!-- Local CSS Files -->
+    <link href="https://emailtown.codesalvageon.repl.co/styles/css/style.css" rel="stylesheet">
+    <link href="https://impala.codesalvageon.repl.co/styles/hover.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+
+    <!-- Effects -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="hover center" id="main">
+      <h1><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F27%2F27630.png&f=1&nofb=1" width="50" height="50"/>Email Town</h1>
+
+      <button class="zoom" id="open-info-modal">How does it work?</button><button class="zoom" id="open-create-email-town-modal">Create an Email Town</button>
+      
+      <div class="center">
+        <button class="zoom" id="open-expanding-your-town-modal">Expanding your town</button><button class="zoom" id="open-explore-other-towns-modal">Explore other towns</button>
+      </div>
+    </div>
+
+    <div class="modal" id="info-modal">
+      <div class="modal-content">
+        <span class="close" id="close-info-modal">&times;</span> 
+        <h3>How Does Email Town Work?</h3>
+        <p>Email Town works by a concept that came out of a fever dream <a href="https://repl.it/@CodeSalvageON" target="_blank">CodeSalvageON</a> had, in which an entire town was inside of an email thread. The town in CodeSalvageON's fever dream was called "Email Town". A 'town' inside an email thread.</p>
+      </div>
+    </div>
+
+    <div class="modal" id="create-email-town-modal">
+      <div class="modal-content">
+        <span class="close" id="close-create-email-town-modal">&times;</span>
+        <h3>Creating an Email Town</h3>
+        <form method="POST" action="https://emailtown.codesalvageon.repl.co/create-town">
+          <p>Your email: <input type="email" class="text-input" name="user_email" required/></p>
+          <p>Select your town type: <select name="user_town" class="text-input" required>
+            <option value="coastal">Coastal Town</option>
+            <option value="rural">Rural Town</option>
+            <option value="suburbs">Innercity Suburbs</option>
+          </select></p>
+          <p>Town visibility: <select name="public_private" class="text-input" required>
+            <option value="private">Private</option>
+            <option value="public">Public</option>
+          </select></p>
+          <p>Town name: <input type="text" class="text-input" name="town_name" maxlength="25" required/></p>
+          <p>Invite your first resident(email address): <input type="email" class="text-input" name="first_resident" required/></p>
+          <p><b>Note:</b> You can invite more residents later on when you recieve the email containing your email town.</p>
+          <button class="text-input zoom">Create Town</button>
+        </form> 
+      </div>
+    </div>
+
+    <div class="modal" id="expanding-your-town-modal">
+      <div class="modal-content">
+        <span class="close" id="close-expanding-your-town-modal">&times;</span> 
+        <h3>Expanding your town</h3>
+        <p>You can expand your town very easily.</p> 
+        <p><b>Note: </b>forwarding your email town <b>DOES NOT</b> add more people to your town. It creates a copy of it.</p>
+        <h3>Ways to do it</h3>
+        <p>Using your own email client</p>
+        <img src="https://emailtown.codesalvageon.repl.co/images/reply.PNG"/>
+        <p>Using the Email Town "invite" button</p>
+      </div>
+    </div>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Client -->
+    <script src="https://emailtown.codesalvageon.repl.co/scripts/javascript/client.js"></script>
+  </body>
+</html>

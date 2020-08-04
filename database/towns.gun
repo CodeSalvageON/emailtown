@@ -1,0 +1,16 @@
+<TITLE>Towns</TITLE>
+
+<!-- Favicon -->
+<link href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F27%2F27630.png&f=1&nofb=1" rel="icon">
+
+<!-- Local CSS Files -->
+<link href="https://emailtown.codesalvageon.repl.co/styles/css/style.css" rel="stylesheet">
+<link href="https://impala.codesalvageon.repl.co/styles/hover.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+
+<!-- Effects -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" rel="stylesheet">
+
+<h1>Public Email Towns (Email IDs)</h1>

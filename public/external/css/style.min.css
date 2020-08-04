@@ -1,0 +1,38 @@
+/* Natural Tags */
+
+body{
+  background-color: #ccff99;
+}
+
+h1, h2, h3, h4, p{
+  font-family: 'Merriweather', serif;
+}
+
+button{
+  border: hidden;
+  border-radius: 5px;
+  font-family: 'Merriweather', serif;
+}
+
+a{
+  color: powderblue;
+}
+
+a:hover{
+  color: coral;
+}
+
+a:visited{
+  color: powderblue;
+}
+
+img{
+  border-radius: 5px;
+}
+
+/* Classes */
+
+.center{
+  margin: auto;
+  text-align: center;
+}
