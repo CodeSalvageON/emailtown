@@ -150,7 +150,23 @@ app.post('/create-town', function(req, res){
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
-      infolog = info;
+      infolog = info.messageId;
+
+      var idMail = {
+        from: 'noreplyimpala@gmail.com',
+        to: mailingList,
+        subject: 'Thread ID for '+user_town_name,
+        text: 'The thread ID for your town is '+infolog+' You will need to use this ID later to add buildings to your town.'
+      }
+
+      transporter.sendMail(idMail, function(err, info){
+        if (err){
+          console.err;
+        }
+        else{
+          console.log();
+        }
+      }); 
 
       if (user_town_visibility == 'public'){
         if (fs.existsSync(town_id_path)){
@@ -203,6 +219,7 @@ app.post('/create-town', function(req, res){
         }
       }
     });
+
     }
   });
 
