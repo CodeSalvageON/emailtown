@@ -225,6 +225,10 @@ app.post('/create-town', function(req, res){
 
 });
 
+app.get('/create-town', function(req, res){
+  res.redirect('/');
+});
+
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
