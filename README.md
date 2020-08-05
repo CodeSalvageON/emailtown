@@ -7,5 +7,6 @@ But anyways!
 
 Email Town works by using Node Mailer to reply to specific email threads, and add HTML content to them, therefore creating a "town".
 
-#BTW
+# BTW
+
 Sorry for the messy code in index.js guys. I had a massive server problem and had to copy and paste code EVERYWHERE.
