@@ -156,15 +156,15 @@ app.post('/create-town', function(req, res){
         from: 'noreplyimpala@gmail.com',
         to: mailingList,
         subject: 'Thread ID for '+user_town_name,
-        text: 'The thread ID for your town is '+infolog+' You will need to use this ID later to add buildings to your town.'
+        text: 'The thread ID for your town is '+infolog+' You will need to use this ID later to add buildings to your town. Your town will be sent to you soon.'
       }
 
-      transporter.sendMail(idMail, function(err, info){
-        if (err){
-          console.err;
+      transporter.sendMail(idMail, function(error, info){
+        if (error){
+          console.log(error);
         }
         else{
-          console.log();
+          console.log('ID MAIL SENT: '+info.response);
         }
       }); 
 
@@ -230,7 +230,7 @@ app.get('/create-town', function(req, res){
 });
 
 app.get('/build', function(req, res){
-  
+  res.sendFile(__dirname+'/public/static/html/build.html');
 });
 
 http.listen(port, function(){
