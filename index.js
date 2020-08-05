@@ -229,6 +229,10 @@ app.get('/create-town', function(req, res){
   res.redirect('/');
 });
 
+app.get('/build', function(req, res){
+  
+});
+
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
