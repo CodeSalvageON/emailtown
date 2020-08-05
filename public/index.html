@@ -41,6 +41,7 @@
         <span class="close" id="close-create-email-town-modal">&times;</span>
         <h3>Creating an Email Town</h3>
         <form method="POST" action="https://emailtown.codesalvageon.repl.co/create-town">
+          <error id="error"><p></p></error>
           <p>Your email: <input type="email" class="text-input" name="user_email" required/></p>
           <p>Select your town type: <select name="user_town" class="text-input" required>
             <option value="coastal">Coastal Town</option>
@@ -69,6 +70,14 @@
         <p>Using your own email client</p>
         <img src="https://emailtown.codesalvageon.repl.co/images/reply.PNG"/>
         <p>Using the Email Town "invite" button</p>
+      </div>
+    </div>
+
+    <div class="modal" id="town-created-modal">
+      <div class="modal-content">
+        <span class="close" id="close-town-created-modal">&times;</span>
+        <h3>Town created!</h3>
+        <p>Say hello to your new email town, mayor. Take good care of it.</p> 
       </div>
     </div>
 

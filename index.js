@@ -43,7 +43,8 @@ app.post('/create-town', function(req, res){
 
   const towns_file = __dirname+'/database/towns.gun';
   const town_id_path = __dirname+'/database/towns/'+user_town_name;
-
+  
+  var infolog;
   var mailHTML;
   
   var mailingList = [
@@ -68,7 +69,7 @@ app.post('/create-town', function(req, res){
     <ul>
       <li><a href="https://emailtown.codesalvageon.repl.co/invite" target="_blank"><h2>Invite More People to Town</h2></a></li>
       <li><a href="https://emailtown.codesalvageon.repl.co/build" target="_blank"><h2>Build Building</h2></a></li>
-      <li><a href=""><h2>Check for Changes(If any)</h2></a></li>
+      
     </ul>
   </body>
 </html>
@@ -91,7 +92,7 @@ app.post('/create-town', function(req, res){
     <ul>
       <li><a href="https://emailtown.codesalvageon.repl.co/invite" target="_blank"><h2>Invite More People to Town</h2></a></li>
       <li><a href="https://emailtown.codesalvageon.repl.co/build" target="_blank"><h2>Build Building</h2></a></li>
-      <li><a href=""><h2>Check for Changes(If any)</h2></a></li>
+      
     </ul>
   </body>
 </html>
@@ -114,13 +115,15 @@ app.post('/create-town', function(req, res){
     <ul>
       <li><a href="https://emailtown.codesalvageon.repl.co/invite" target="_blank"><h2>Invite More People to Town</h2></a></li>
       <li><a href="https://emailtown.codesalvageon.repl.co/build" target="_blank"><h2>Build Building</h2></a></li>
-      <li><a href=""><h2>Check for Changes(If any)</h2></a></li>
+      
     </ul>
   </body>
 </html>
   `;
 
-  let scriptAppend = `<script src="https://emailtown.codesalvageon.repl.co/scripts/append.js"></script>`;
+  let scriptAppend = `<script src="https://emailtown.codesalvageon.repl.co/scripts/javascript/append.js"></script>`;
+
+  let scriptAlert = `<script src="https://emailtown.codesalvageon.repl.co/scripts/javascript/town_create.js"></script>`;
 
   let space = `
   `;
@@ -147,7 +150,8 @@ app.post('/create-town', function(req, res){
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
-      
+      infolog = info;
+
       if (user_town_visibility == 'public'){
         if (fs.existsSync(town_id_path)){
           fs.readFile(__dirname+'/public/index.html', 'utf8', function(err, data){
@@ -158,6 +162,7 @@ app.post('/create-town', function(req, res){
               res.send(data+scriptAppend);
             }
           });
+
         }
         else{
           fs.appendFile(town_id_path, info.messageId, function(err){
@@ -169,7 +174,7 @@ app.post('/create-town', function(req, res){
             }
           });
 
-          fs.appendFile(__dirname+'/database/towns.gun', space+'<h2>'+user_town_name+' Thread ID: '+info.messageId+'</h2>', function(err){
+          fs.appendFile(__dirname+'/database/towns.gun', space+'<h2>'+user_town_name+' Thread ID: <label>'+info.messageId+'</label></h2>', function(err){
             if (err){
               console.err;
             }
@@ -182,8 +187,25 @@ app.post('/create-town', function(req, res){
       else{
         console.log('PRIVATE Email Town created');
       }
+
+    fs.readFile(__dirname+'/public/index.html', 'utf8', function(err, data){
+      if (err){
+        console.err;
+      }
+      else{
+        if (fs.existsSync(town_id_path)){
+          console.log('EXISTS');
+          res.send(data+scriptAlert);
+        }
+        else{
+
+          res.send(data+scriptAlert);
+        }
+      }
+    });
     }
   });
+
 });
 
 http.listen(port, function(){
