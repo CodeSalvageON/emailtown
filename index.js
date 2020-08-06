@@ -211,7 +211,6 @@ app.post('/create-town', function(req, res){
       else{
         if (fs.existsSync(town_id_path)){
           console.log('EXISTS');
-          res.send(data+scriptAlert);
         }
         else{
 
@@ -231,6 +230,74 @@ app.get('/create-town', function(req, res){
 
 app.get('/build', function(req, res){
   res.sendFile(__dirname+'/public/static/html/build.html');
+});
+
+app.get('/invite', function(req, res){
+  res.sendFile(__dirname+'/public/static/html/invite.html');
+});
+
+app.post('/build', function(req, res){
+  var thread = req.body.email_id;
+  var user_building_type = req.body.building_type;
+  var user_img_link = req.body.image_link;
+  var user_building_name = req.body.building_name;
+  
+  var half_thread = thread.replace('<', '');
+  var final_thread = half_thread.replace('>', '');
+
+  var image_src;
+
+  if (user_img_link == null || user_img_link == undefined || user_img_link == ''){
+    if (user_building_type == 'house'){
+      image_src = 'https://i.pinimg.com/originals/bc/b1/80/bcb180f4c8bd307037a64d8dae02d2cf.jpg';
+    }
+    else if (user_building_type == 'shop'){
+      image_src = 'https://images-ext-1.discordapp.net/external/BjnpBhIPZ043lVsZ8GXkUsCks_JTTNn77-69A07k73k/%3Fwidth%3D640%26crop%3Dsmart%26auto%3Dwebp%26s%3D4efba3b94fb097c73a3340714d33c85d86000257/https/preview.redd.it/x5gf5mqlque51.png';
+    }
+    else if (user_building_type == 'custom'){
+      image_src = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.nreionline.com%2Fsites%2Fnreionline.com%2Ffiles%2Foffice%2520suburban_GettyImages-176861453.jpg&f=1&nofb=1';
+    }
+  }
+  else{
+    image_src = user_img_link;
+  }
+
+  var buildingHTML = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h2>`+user_building_name+`</h2>
+    <img src="`+image_src+`" />
+  </body>
+</html>
+  `;
+
+  var buildingOptions = {
+    from: 'noreplyimpala@gmail.com',
+    html: buildingHTML,
+    to: 'noreplyimpala@gmail.com',
+    inReplyTo: thread,
+    references: thread,
+    headers: {
+      replyTo: 'noreplyimpala@gmail.com',
+      messageId: 'noreplyimpala@gmail.com',
+      inReplyTo: thread,
+      references: thread,
+    }
+  }
+
+  transporter.sendMail(buildingOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Building created: ' + info.response);
+  }
+  res.redirect('/build');
+});
+
 });
 
 http.listen(port, function(){
