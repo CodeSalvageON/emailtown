@@ -320,10 +320,17 @@ app.post('/invite', function(req, res){
 </html>
   `;
 
+  invites = [
+    invite_owner,
+    invite_resident,
+    'noreplyimpala@gmail.com'
+  ];
+
   var inviteOptions = {
     from: 'noreplyimpala@gmail.com',
     html: invite_html,
-    to: invite_owner,
+    to: invites,
+    cc: invites,
     inReplyTo: invite_thread,
     replyTo: invite_owner,
     references: invite_thread,
