@@ -18,6 +18,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css" rel="stylesheet">
   </head>
   <body>
+    <h1 class="center">Invite A Resident to your town</h1>
+    <div class="center">
+      <h4>Trouble finding the Thread ID? Click <a href="https://www.accelo.com/resources/blog/how-to-find-an-email-s-message-id/#Finding%20the%20Message-ID%20in%20Gmail" target="_blank">here</a>.</h4>
+      <form method="POST" action="https://emailtown.codesalvageon.repl.co/invite">
+        <h3>Thread ID: <input type="text" name="thread_invite_id" class="text-input"/></h3>
+        <h3>Town Name: <input type="text" name="invite_town_name" class="text-input"/></h3>
+        <h3>Owner's Email: <input type="email" name="invite_owner_email" class="text-input"/></h3>
+        <h3>Email of who you want to invite: <input type="email" name="invite_resident_email" class="text-input"/></h3>
+        <button class="text-input">Invite</button>
+      </form>
+    </div>
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

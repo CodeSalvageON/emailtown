@@ -307,6 +307,45 @@ app.post('/build', function(req, res){
 
 });
 
+app.post('/invite', function(req, res){
+  var invite_thread = req.body.thread_invite_id;
+  var invite_town = req.body.invite_town_name;
+  var invite_owner = req.body.invite_owner_email;
+  var invite_resident = req.body.invite_resident_email;
+
+  var invite_html = `
+<!DOCTYPE html>
+<html>
+  <h3>`+invite_resident+` was just invited. Say hello!</h3>
+</html>
+  `;
+
+  var inviteOptions = {
+    from: 'noreplyimpala@gmail.com',
+    html: invite_html,
+    to: invite_owner,
+    inReplyTo: invite_thread,
+    replyTo: invite_owner,
+    references: invite_thread,
+    headers: {
+      messageId: 'noreplyimpala@gmail.com',
+      inReplyTo: invite_thread,
+      references: invite_thread,
+    },
+    subject: 'The Town of '+invite_town
+  }
+
+  transporter.sendMail(inviteOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Invite created: ' + info.response);
+  }
+  });
+
+  res.redirect('/invite');
+});
+
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
