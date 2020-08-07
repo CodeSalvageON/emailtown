@@ -64,6 +64,7 @@ app.post('/create-town', function(req, res){
   </head>
   <body>
     <h1 class="center">The Town of `+user_town_name+`</h1>
+    <h3>Owner: `+user_email_address+`</h3>
     <img class="center" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Ffiles.usmre.com%2F5422%2FMotif%2520Rockport%2520MA.jpg&f=1&nofb=1" width="650" height="500"></img>
 
     <ul>
@@ -87,6 +88,7 @@ app.post('/create-town', function(req, res){
   </head>
   <body>
     <h1 class="center">The Town of `+user_town_name+`</h1>
+    <h3>Owner: `+user_email_address+`</h3>
     <img class="center" src="https://learn.sharedusemobilitycenter.org/wp-content/uploads/Small-town-1024x623.jpeg" width="650" height="500"></img>
 
     <ul>
@@ -110,6 +112,7 @@ app.post('/create-town', function(req, res){
   </head>
   <body>
     <h1 class="center">The Town of `+user_town_name+`</h1>
+    <h3>Owner: `+user_email_address+`</h3>
     <img class="center" src="https://www.tcdhomes.com/wp-content/uploads/2016/02/hemlock01.jpg" width="650" height="500"></img>
 
     <ul>
@@ -155,6 +158,7 @@ app.post('/create-town', function(req, res){
       var idMail = {
         from: 'noreplyimpala@gmail.com',
         to: mailingList,
+        cc: mailingList,
         subject: 'Thread ID for '+user_town_name,
         text: 'The thread ID for your town is '+infolog+' You will need to use this ID later to add buildings to your town. Your town will be sent to you soon.'
       }
@@ -241,6 +245,8 @@ app.post('/build', function(req, res){
   var user_building_type = req.body.building_type;
   var user_img_link = req.body.image_link;
   var user_building_name = req.body.building_name;
+  var townname = req.body.town_name;
+  var user_email = req.body.useremail;
   
   var half_thread = thread.replace('<', '');
   var final_thread = half_thread.replace('>', '');
@@ -278,15 +284,16 @@ app.post('/build', function(req, res){
   var buildingOptions = {
     from: 'noreplyimpala@gmail.com',
     html: buildingHTML,
-    to: 'noreplyimpala@gmail.com',
+    to: user_email,
     inReplyTo: thread,
+    replyTo: user_email,
     references: thread,
     headers: {
-      replyTo: 'noreplyimpala@gmail.com',
       messageId: 'noreplyimpala@gmail.com',
       inReplyTo: thread,
       references: thread,
-    }
+    },
+    subject: 'The Town of '+townname
   }
 
   transporter.sendMail(buildingOptions, function(error, info){

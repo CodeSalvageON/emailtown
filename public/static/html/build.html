@@ -20,6 +20,7 @@
   <body>
     <h1 class="center">Create a building in your town...</h1>
     <div class="center">
+      <h4>Trouble finding the Thread ID? Click <a href="https://www.accelo.com/resources/blog/how-to-find-an-email-s-message-id/#Finding%20the%20Message-ID%20in%20Gmail" target="_blank">here</a>.</h4>
       <form action="https://emailtown.codesalvageon.repl.co/build" method="POST">
         <h3>Thread ID: <input type="text" name="email_id" class="text-input" required/></h3>
         <h3>Building Type: <select class="text-input" name="building_type" required>
@@ -27,6 +28,8 @@
           <option value="shop">Shop</option>
           <option value="misc">Custom</option>
         </select></h3>
+        <h3>Town Name: <input type="text" required name="town_name" class="text-input"/></h3>
+        <h3>Owners Email: <input type="email" name="useremail" class="text-input" required/></h3>
         <h3>Building Name(Optional): <input type="text" name="building_name" class="text-input"/></h3>
         <h3>Image link(Optional): <input type="text" name="image_link" class="text-input"/></h3>
         <button class="text-input zoom">Create Building</button>
